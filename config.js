@@ -10,6 +10,7 @@ const config = require('yargs')
     .describe('h', 'show help')
     .describe('disable-names', 'use light ID instead of name when publishing changes')
     .describe('mqtt-retain', 'enable/disable retain flag for mqtt messages')
+    .describe('publish-only-on-change', 'set to false to publish current state every "polling-interval"-seconds')
     .alias({
         b: 'bridge',
         h: 'help',
@@ -21,12 +22,14 @@ const config = require('yargs')
     })
     .boolean('disable-names')
     .boolean('mqtt-retain')
+    .boolean('publish-only-on-change')
     .default({
         u: 'mqtt://127.0.0.1',
         n: 'hue',
         v: 'info',
         p: 10,
-        'mqtt-retain': true
+        'mqtt-retain': true,
+        'publish-only-on-change': true
     })
     .version()
     .help('help')

@@ -24,6 +24,7 @@ const lightStates = {};
 
 function start() {
     log.setLevel(config.verbosity);
+    log.debug(config);
     log.info(pkg.name + ' ' + pkg.version + ' starting');
 
     if (config.bridge) {
@@ -359,7 +360,7 @@ function publishChanges(light) {
         }
     });
     const changes = oe.extend(lightStates[light.id], light.state);
-    if (changes) {
+    if (changes || !config.publishOnlyOnChange) {
         const payload = {
             val: lightStates[light.id].on ? lightStates[light.id].bri : 0,
             hue_state: lightStates[light.id] // eslint-disable-line camelcase
